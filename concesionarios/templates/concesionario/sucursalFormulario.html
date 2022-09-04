@@ -1,0 +1,15 @@
+{% extends "concesionario/padre.html" %}
+
+{% load static %}
+
+{% block titulo_de_pagina %}
+<h1>Formulario de sucursales</h1>
+<form action="{% url 'sucursalFormulario' %}" method="POST"> {% csrf_token %}
+
+<table style="margin:0 auto;">
+    {{ formulario.as_table }}
+</table>
+<input type="submit", value="Enviar">
+</form>
+<h2>{{ mensaje }}</h2>
+{% endblock %}

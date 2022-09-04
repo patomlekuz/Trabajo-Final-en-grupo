@@ -1,0 +1,20 @@
+{% extends "concesionario/padre.html" %}
+
+{% load static %}
+
+{% block titulo_de_pagina %}
+<h1>Busqueda de Auto por patente</h1>
+<form action="{% url 'buscar_auto' %}" method="GET"> {% csrf_token %}
+
+<input type="text" name="patente",id="patente">
+
+<input type="submit", value="Buscar">
+</form>
+<h2 style="color: red"> {{ mensaje }}</h2>
+{% endblock %}
+
+
+
+
+
+

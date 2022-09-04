@@ -1,0 +1,26 @@
+{% extends "concesionario/padre.html" %}
+
+{% load static %}
+{% block titulo_de_pagina %}
+<h1>Listado Autos</h1>
+
+{% endblock %}
+{% block contenido %}
+<h1>Listado Autos</h1>
+
+{% for auto in autos %}
+
+<h3>Marca: {{ auto.marca }}</h3>
+<h3>Modelo: {{ auto.modelo }}</h3>
+<h3>Fecha de ingreso: {{ auto.fecha_ing }}</h3>
+<button>
+    <a href="{% url 'eliminarAuto' auto.id %}">ELMINAR</a>
+</button>
+<br>
+--
+</br>
+{% endfor %}
+
+<h2>{{ mensaje }}</h2>
+
+{% endblock %}

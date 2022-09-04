@@ -1,0 +1,14 @@
+{% extends "concesionario/padre.html" %}
+
+{% load static %}
+
+{% block titulo_de_pagina %}
+<h1>Busqueda de cliente por DNI</h1>
+<form action="{% url 'buscar_cliente' %}" method="GET"> {% csrf_token %}
+
+<input type="text" name="dni",id="dni">
+
+<input type="submit", value="Buscar">
+</form>
+<h2 style="color: red"> {{ mensaje }}</h2>
+{% endblock %}

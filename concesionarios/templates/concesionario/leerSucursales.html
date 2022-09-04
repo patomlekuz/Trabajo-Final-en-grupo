@@ -1,0 +1,28 @@
+{% extends "concesionario/padre.html" %}
+
+{% load static %}
+{% block titulo_de_pagina %}
+<h1>Listado Sucursales</h1>
+
+{% endblock %}
+
+{% block contenido %}
+<h1>Listado Sucursales</h1>
+
+{% for sucursal in sucursales %}
+
+<h3>Provincia: {{ sucursal.provincia }}</h3>
+<h3>Cantiadad de empleados: {{ sucursal.empleados }}</h3>
+<h3>Fecha de inauguracion de la sucursal: {{ sucursal.fecha_inaugural }}</h3>
+<button>
+    <a href="{% url 'eliminarSucursal' sucursal.id %}">ELIMINAR</a>
+    
+    </button>
+    <br>
+     --
+    </br>
+{% endfor %}
+
+<h2>{{ mensaje }}</h2>
+
+{% endblock %}
