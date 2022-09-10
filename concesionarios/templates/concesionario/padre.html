@@ -17,8 +17,8 @@
             <div class="container px-4">
                 <a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">
+                <br class="collapse navbar-collapse" id="navbarResponsive">
+                    <br class="navbar-nav ms-auto">
                         
                         <li class="nav-item"><a class="nav-link" href="{% url 'busquedaAuto' %}">Busqueda Auto</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'busquedaCliente' %}">Busqueda Cliente</a></li>
@@ -26,6 +26,11 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'autoFormulario' %}">Formulario Auto</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'clienteFormulario' %}">Formulario Cliente</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'sucursalFormulario' %}">Formulario Sucursal</a></li>
+                        <br><li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Iniciar Sesion</a></li></br>
+                        <br><li class="nav-item"><a class="nav-link" href="{% url 'register' %}">REGISTRATE!</a></li></br>
+                        <br><li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Cerrar Sesion</a></li></br>
+                        
+                        
                     </ul>
                 </div>
             </div>
@@ -37,7 +42,7 @@
                 {% block titulo_de_pagina %}
                 
                 {% endblock %}
-                <button>
+                <br><button>
                     <a href="{% url 'leerAutos' %}">Todos los Autos</a>
                 </button>
                 <button>
@@ -46,7 +51,7 @@
                 <button>
                     <a href="{% url 'leerSucursales' %}">Todas las Sucursales</a>
                  </button>
-            </h1>
+            </h1> </br>
                 
             </div>
         </header>

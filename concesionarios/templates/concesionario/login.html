@@ -1,0 +1,15 @@
+{% extends "concesionario/padre.html" %}
+
+{% load static %}
+
+{% block titulo_de_pagina %}
+<h1>LOGIN</h1>
+<h2 style="color: red">{{ mensaje }}</h2>
+<form action="{% url 'login' %}" method="POST"> {% csrf_token %}
+
+    {{ form.as_p }}
+    <button type="submit">INICIAR SESION</button>
+
+
+</form>
+{% endblock %}

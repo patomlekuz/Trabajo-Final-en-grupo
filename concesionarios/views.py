@@ -3,8 +3,9 @@ from django.shortcuts import render
 from .models import auto,sucursal,cliente
 from django.template import Context,Template,loader
 from concesionarios.forms import *
-# Create your views here.
-
+from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.decorators import login_required
 def concesionario(request):
     #Esto viene a ser la landing
     return render (request,"concesionario/template1.html")
@@ -69,7 +70,7 @@ def sucursalFormulario(request):
     else:
         miFormularios=SucursalFormulario()
         return render(request,"concesionario/sucursalFormulario.html",{"formulario":miFormularios})
-
+@login_required
 def buscar_sucursal(request):
     if request.GET["localidad"]:
         locali=request.GET["localidad"]
@@ -142,6 +143,36 @@ def eliminarSucursal(request,id):
     totalsucursales=sucursal.objects.all()
     return render(request, "concesionario/leerSucursales.html", {"sucursales":totalsucursales})
         
+def login_request(request):
+    if request.method=="POST":
+        form= AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            usuario=request.POST["username"]
+            clave=request.POST["password"]
+            acceso=authenticate(username=usuario,password=clave)
+            if acceso is not None:
+                login(request, acceso)
+                return render(request,"concesionario/template1.html",{"mensaje":f"Sesion iniciada correctamente,Bienvenido {usuario}"}) 
+            else:
+                return render(request,"concesionario/login.html",{"form":form, "mensaje":"Usuario o contraseña incorrectos"})
+        else:
+            return render(request,"concesionario/login.html",{"form":form, "mensaje":"Usuario o contraseña incorrectos"})
+    else:
+        form=AuthenticationForm()
+        return render(request,"concesionario/login.html",{"form":form})
+
+def register(request):
+    if request.method=="POST":
+        form= UserRegisterForm(request.POST)
+        if form.is_valid():
+            username=form.cleaned_data["username"]
+            form.save()
+            return render(request,"concesionario/template1.html",{"mensaje":f"Usuario {username} creado exitosamente"})
+    else:
+        form=UserRegisterForm()
+    return render(request,"concesionario/register.html",{"form":form})
+
+    
 
 
 

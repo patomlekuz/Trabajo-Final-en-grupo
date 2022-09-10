@@ -1,6 +1,8 @@
 from sqlite3 import Cursor
 from django.urls import path
 from .views import *
+from django.contrib.auth.views import LogoutView
+
 
 urlpatterns=[
     
@@ -20,5 +22,7 @@ urlpatterns=[
     path("eliminarAuto/<id>", eliminarAuto, name="eliminarAuto"),
     path("eliminarCliente/<id>", eliminarCliente, name="eliminarCliente"),
     path("eliminarSucursal/<id>", eliminarSucursal, name="eliminarSucursal"),
-    
+    path("login/",login_request,name="login"),
+    path("register/",register,name="register"),
+    path("logout/",LogoutView.as_view(template_name="concesionario/logout.html"),name="logout"),
 ]
