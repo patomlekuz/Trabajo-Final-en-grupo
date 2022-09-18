@@ -1,0 +1,32 @@
+{% extends "concesionario/padre.html" %}
+
+{% load static %}
+{% block titulo_de_pagina %}
+<h1>Listado Autos</h1>
+
+{% endblock %}
+{% block contenido %}
+<h1>Listado mensajes</h1>
+ {% if mensaje  %}
+ <h2>{{ mensaje }}</h2>
+ <a href="{% url 'leerMensaje' %}" class="btn-btn primary"> Volver a mis mensajes</a>
+{% else %}
+ 
+ <h2>tenes {{ cantmensajes }} mensajes!</h2>
+{% for mensaje in mensajes %}
+<div class="card mb-4"> 
+    <div class="card-body">
+<h3 class="card-title"> Mensaje de: {{ mensaje.autor }}</h3>
+<h3 class="card-subtitle">titulo: {{ mensaje.titulo }}</h3>
+
+<a href="{% url 'misMensajes' mensaje.id %}" class="btn-btn primary"> Ver Mas</a>
+<a href="{% url 'eliminarMensajes' mensaje.id %}" class="btn-btn primary"> Eliminar mensaje</a>
+
+</div>
+</div> 
+{% endfor %}
+{% endif %}
+
+
+
+{% endblock %}
