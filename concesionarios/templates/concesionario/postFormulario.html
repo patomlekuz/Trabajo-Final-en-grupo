@@ -3,8 +3,8 @@
 {% load static %}
 
 {% block titulo_de_pagina %}
-<h1>Formulario de sucursales</h1>
-<form action="{% url 'sucursalFormulario' %}" method="POST"> {% csrf_token %}
+<h1>Hace tu nuevo posteo. De qué queres hablar?</h1>
+<form action="{% url 'postFormulario' %}" method="POST"> {% csrf_token %}
 
 <table style="margin:0 auto;">
     {{ formulario.as_table }}

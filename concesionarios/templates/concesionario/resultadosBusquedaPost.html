@@ -8,11 +8,13 @@
 
 {% block contenido %}
 <h1>Resultados de la busqueda</h1>
-{% for sucursal in sucursales %}
+{% for post in posts %}
 
-<h3>Provincia: {{ sucursal.provincia }}</h3>
-<h3>Cantiadad de empleados: {{ sucursal.empleados }}</h3>
-<h3>Fecha de inauguracion de la sucursal: {{ sucursal.fecha_inaugural }}</h3>
+<h3>Titulo: {{ post.titulo_del_post }}</h3>
+<h3>Usuario: {{ post.usuario }}</h3>
+<h3>Auto: {{ post.auto }}</h3>
+<h3>Posteo: {{ post.posteo }}</h3>
+<h3>: {{ post.imagen }}</h3>
 --
 {% endfor %}
 

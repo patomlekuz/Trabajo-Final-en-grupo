@@ -3,10 +3,10 @@
 {% load static %}
 
 {% block titulo_de_pagina %}
-<h1>Busqueda de sucursales por localidad</h1>
-<form action="{% url 'buscar_sucursal' %}" method="GET"> {% csrf_token %}
+<h1>Busqueda de posts por titulo</h1>
+<form action="{% url 'buscar_post' %}" method="GET"> {% csrf_token %}
 
-<input type="text" name="localidad",id="localidad">
+<input type="text" name="titulo_del_post",id="titulo_del_post">
 
 <input type="submit", value="Buscar">
 </form>

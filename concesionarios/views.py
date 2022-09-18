@@ -1,11 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import auto,sucursal,cliente
+from .models import auto,post,cliente
 from django.template import Context,Template,loader
 from concesionarios.forms import *
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
+
 def concesionario(request):
     #Esto viene a ser la landing
     return render (request,"concesionario/template1.html")
@@ -51,36 +52,38 @@ def autoFormulario(request):
         miFormularioa=AutoFormulario()
         return render(request,"concesionario/autoFormulario.html",{"formulario":miFormularioa})
 
-def sucursalFormulario(request):
+def postFormulario(request):
     if request.method=="POST":
-        miFormularios = SucursalFormulario(request.POST)
-        print(miFormularios)
-        if miFormularios.is_valid():
-            info=miFormularios.cleaned_data
+        miFormulariop = PostFormulario(request.POST)
+        print(miFormulariop)
+        if miFormulariop.is_valid():
+            info=miFormulariop.cleaned_data
             print(info)
-            provincia=info.get("provincia")
-            localidad=info.get("localidad")
-            empleados=info.get("empleados")
-            fecha_inaugural=info.get("fecha_inaugural")
-            sucursal1=sucursal(provincia=provincia,localidad=localidad,empleados=empleados,fecha_inaugural=fecha_inaugural)
-            sucursal1.save()
-            return render(request,"concesionario/template1.html",{"mensaje":"Sucursal Creada"})
+            usuario=info.get("usuario")
+            titulo_del_post=info.get("titulo_del_post")
+            auto=info.get("auto")
+            #imagen=info.get("imagen")
+            posteo=info.get("posteo")
+            post1=post(usuario=usuario,titulo_del_post=titulo_del_post,auto=auto,posteo=posteo)#,imagen=imagen)
+            post1.save()
+            return render(request,"concesionario/template1.html",{"mensaje":"Buen posteo"})
         else:
-            return render(request,"concesionario/template1.html",{"mensaje":"Error en la carga"})
+            return render(request,"concesionario/template1.html",{"mensaje":"Ese posteo no se generó"})
     else:
-        miFormularios=SucursalFormulario()
-        return render(request,"concesionario/sucursalFormulario.html",{"formulario":miFormularios})
+        miFormulariop=PostFormulario()
+        return render(request,"concesionario/postFormulario.html",{"formulario":miFormulariop})
+
 @login_required
-def buscar_sucursal(request):
-    if request.GET["localidad"]:
-        locali=request.GET["localidad"]
-        sucursales=sucursal.objects.filter(localidad=locali)
-        if len(sucursales)!=0:
-            return render (request, "concesionario/resultadosBusquedaSucursal.html",{"sucursales":sucursales})
+def buscar_post(request):
+    if request.GET.get("titulo_del_post"):
+        titulo=request.GET["titulo_del_post"]
+        posts=post.objects.filter(titulo_del_post=titulo)
+        if len(posts)!=0:
+            return render (request, "concesionario/resultadosBusquedaPost.html",{"posts":posts})
         else:
-            return render (request, "concesionario/resultadosBusquedaSucursal.html",{"mensaje": "no hay una sucursal en esa localidad"})
+            return render (request, "concesionario/resultadosBusquedaPost.html",{"mensaje": "no hay un post con ese título"})
     else:
-        return render (request, "concesionario/busquedaSucursal.html",{"mensaje": "No ingresaste ningun dato"})
+        return render (request, "concesionario/busquedaPost.html",{"mensaje": "No ingresaste ningun dato"})
 
 def buscar_cliente(request):
     if request.GET["dni"]:
@@ -104,8 +107,8 @@ def buscar_auto(request):
     else:
         return render (request, "concesionario/busquedaAuto.html",{"mensaje": "No ingresaste ningun dato"}) 
 
-def busquedaSucursal(request):
-    return render(request,"concesionario/busquedaSucursal.html")
+def busquedaPost(request):
+    return render(request,"concesionario/busquedaPost.html")
 
 def busquedaCliente(request):
     return render(request,"concesionario/busquedaCliente.html")
@@ -121,9 +124,9 @@ def leerClientes(request):
     clientes=cliente.objects.all()
     return render(request, "concesionario/leerClientes.html", {"clientes":clientes})
 
-def leerSucursales(request):
-    sucursales=sucursal.objects.all()
-    return render(request, "concesionario/leerSucursales.html", {"sucursales":sucursales})
+def leerPosts(request):
+    posts=post.objects.all()
+    return render(request, "concesionario/leerPosts.html", {"posts":posts})
 
 def eliminarAuto(request,id):
     autos=auto.objects.get(id=id)
@@ -137,11 +140,11 @@ def eliminarCliente(request,id):
     totalclientes=auto.objects.all()
     return render(request, "concesionario/leerClientes.html", {"clientes":totalclientes})
 
-def eliminarSucursal(request,id):
-    sucursales=sucursal.objects.get(id=id)
-    sucursales.delete()
-    totalsucursales=sucursal.objects.all()
-    return render(request, "concesionario/leerSucursales.html", {"sucursales":totalsucursales})
+def eliminarPost(request,id):
+    posts=post.objects.get(id=id)
+    posts.delete()
+    totalposts=post.objects.all()
+    return render(request, "concesionario/leerPosts.html", {"posts":totalposts})
         
 def login_request(request):
     if request.method=="POST":
@@ -171,21 +174,3 @@ def register(request):
     else:
         form=UserRegisterForm()
     return render(request,"concesionario/register.html",{"form":form})
-
-    
-
-
-
-
-#view para formulario a mano:
-#def clienteFormulario(request):
-#    if request.method=="POST":
-#        nombre=request.POST.get("nombre")
-#        apellido=request.POST.get("apellido")
-#        dni=request.POST.get("dni")
-#        fecha_compra=request.POST.get("fecha_compra")
-#        cliente1=cliente(nombre=nombre,apellido=apellido,dni=dni,fecha_compra=fecha_compra)
-#        cliente1.save()
-#        return render(request,"concesionarios/template1.html")
-#    return render (request,"concesionarios/clienteFormulario.html")
-
