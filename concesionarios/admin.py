@@ -4,7 +4,7 @@ from .models import *
 
 admin.site.register(auto)
 
-admin.site.register(sucursal)
+admin.site.register(post)
 
 admin.site.register(cliente)
 

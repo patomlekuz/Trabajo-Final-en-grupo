@@ -1,5 +1,6 @@
 from importlib.abc import PathEntryFinder
 from django.db import models
+from ckeditor.fields import RichTextField,RichTextFormField
 
 # Create your models here.
 
@@ -12,14 +13,16 @@ class auto(models.Model):
     def __str__(self):
         return self.patente
 
-class sucursal(models.Model):
-    provincia=models.CharField(max_length=50)
-    localidad=models.CharField(max_length=50)
-    empleados=models.IntegerField()
-    fecha_inaugural=models.DateField()
+class post(models.Model):
+    posteo=RichTextField(blank=True,null=True)
+    usuario=models.CharField(max_length=50)
+    titulo_del_post=models.CharField(max_length=100)
+    auto=models.CharField(max_length=50)
+
+#    imagen=models.ImageField()
 
     def __str__(self):
-        return self.localidad
+        return self.titulo_del_post
 
 class cliente(models.Model):
     nombre=models.CharField(max_length=50)

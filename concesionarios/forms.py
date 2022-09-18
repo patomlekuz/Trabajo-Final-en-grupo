@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField,RichTextFormField
 
 class ClienteFormulario(forms.Form):
     nombre=forms.CharField(max_length=50)
@@ -14,11 +15,12 @@ class AutoFormulario(forms.Form):
     modelo=forms.IntegerField()
     fecha_ing=forms.DateField(input_formats=['%Y-%m-%d'])
 
-class SucursalFormulario(forms.Form):
-    provincia=forms.CharField(max_length=50)
-    localidad=forms.CharField(max_length=50)
-    empleados=forms.IntegerField()
-    fecha_inaugural=forms.DateField(input_formats=['%Y-%m-%d'])
+class PostFormulario(forms.Form):
+    posteo=RichTextField(blank=True,null=True)
+    titulo_del_post=forms.CharField(max_length=100)
+    usuario=forms.CharField(max_length=50)
+    auto=forms.CharField(max_length=50)
+#    imagen=forms.ImageField()
 
 class UserRegisterForm(UserCreationForm):
     email= forms.EmailField()
