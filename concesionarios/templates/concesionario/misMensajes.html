@@ -1,0 +1,15 @@
+{% extends "concesionario/padre.html" %}
+
+{% load static %}
+
+{% block contenido %}
+<h1>Mis Mensajes!</h1>
+
+<br><h3>Autor:{{ mensajes.autor }}</h3>
+<br><h3>Titulo:{{ mensajes.titulo }}</h3>
+<br><h3>Mensaje:<br>{{ mensajes.mensaje }}</h3>
+
+    <a href="{% url 'leerMensaje' %}" class="btn-btn primary"> Volver a mis mensajes</a>
+
+{% endblock %}
+
