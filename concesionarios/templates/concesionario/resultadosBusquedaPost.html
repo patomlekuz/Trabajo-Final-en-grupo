@@ -1,0 +1,23 @@
+{% extends "concesionario/padre.html" %}
+
+{% load static %}
+{% block titulo_de_pagina %}
+<h1>Resultados Busqueda</h1>
+
+{% endblock %}
+
+{% block contenido %}
+<h1>Resultados de la busqueda</h1>
+{% for post in posts %}
+
+<h3>Titulo: {{ post.titulo_del_post }}</h3>
+<h3>Usuario: {{ post.usuario }}</h3>
+<h3>Auto: {{ post.auto }}</h3>
+<h3>Posteo: {{ post.posteo }}</h3>
+<h3>: {{ post.imagen }}</h3>
+--
+{% endfor %}
+
+<h2>{{ mensaje }}</h2>
+
+{% endblock %}

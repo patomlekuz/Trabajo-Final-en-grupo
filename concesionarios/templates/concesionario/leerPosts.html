@@ -1,0 +1,29 @@
+{% extends "concesionario/padre.html" %}
+
+{% load static %}
+{% block titulo_de_pagina %}
+<h1>Listado Posts</h1>
+
+{% endblock %}
+
+{% block contenido %}
+<h1>Listado Posts</h1>
+
+{% for post in posts %}
+
+<h3>Titulo del post: {{ post.titulo_del_post }}</h3>
+<h3>Usuario del post: {{ post.usuario }}</h3>
+<h3>Auto del post: {{ post.auto }}</h3>
+<h3>Contenido: {{ post.posteo }}</h3>
+<button>
+    <a href="{% url 'eliminarPost' post.id %}">ELIMINAR</a>
+    
+    </button>
+    <br>
+     --
+    </br>
+{% endfor %}
+
+<h2>{{ mensaje }}</h2>
+
+{% endblock %}
