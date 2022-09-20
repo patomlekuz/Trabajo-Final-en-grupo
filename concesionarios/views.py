@@ -58,7 +58,8 @@ def busquedaCliente(request):
 def busquedaAuto(request):
     return render(request,"concesionario/busquedaAuto.html")
 
-
+def aboutus(request):
+    return render(request,"concesionario/aboutus.html")
 
 def leerPosts(request):
     posts=post.objects.all()
