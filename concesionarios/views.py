@@ -12,66 +12,29 @@ def concesionario(request):
     return render (request,"concesionario/template1.html")
 
 #view para formulario con django
-def clienteFormulario(request):
-    if request.method=="POST":
-        miFormularioc = ClienteFormulario(request.POST)
-        print(miFormularioc)
-        if miFormularioc.is_valid():
-            info=miFormularioc.cleaned_data
-            print(info)
-            nombre=info.get("nombre")
-            apellido=info.get("apellido")
-            dni=info.get("dni")
-            fecha_compra=info.get("fecha_compra")
-            cliente1=cliente(nombre=nombre,apellido=apellido,dni=dni,fecha_compra=fecha_compra)
-            cliente1.save()
-            return render(request,"concesionario/template1.html",{"mensaje":"Cliente Creado"})
-        else:
-            return render(request,"concesionario/template1.html",{"mensaje":"Error en la carga"})
-    else:
-        miFormularioc=ClienteFormulario()
-        return render(request,"concesionario/clienteFormulario.html",{"formulario":miFormularioc})
-    
-def autoFormulario(request):
-    if request.method=="POST":
-        miFormularioa = AutoFormulario(request.POST)
-        print(miFormularioa)
-        if miFormularioa.is_valid():
-            info=miFormularioa.cleaned_data
-            print(info)
-            marca=info.get("marca")
-            patente=info.get("patente")
-            modelo=info.get("modelo")
-            fecha_ing=info.get("fecha_ing")
-            auto1=auto(marca=marca,patente=patente,modelo=modelo,fecha_ing=fecha_ing)
-            auto1.save()
-            return render(request,"concesionario/template1.html",{"mensaje":"Auto Creado"})
-        else:
-            return render(request,"concesionario/template1.html",{"mensaje":"Error en la carga"})
-    else:
-        miFormularioa=AutoFormulario()
-        return render(request,"concesionario/autoFormulario.html",{"formulario":miFormularioa})
 
 def postFormulario(request):
+    log=request.user
     if request.method=="POST":
-        miFormulariop = PostFormulario(request.POST)
-        print(miFormulariop)
-        if miFormulariop.is_valid():
-            info=miFormulariop.cleaned_data
-            print(info)
-            usuario=info.get("usuario")
-            titulo_del_post=info.get("titulo_del_post")
-            auto=info.get("auto")
-            #imagen=info.get("imagen")
-            posteo=info.get("posteo")
-            post1=post(usuario=usuario,titulo_del_post=titulo_del_post,auto=auto,posteo=posteo)#,imagen=imagen)
+        forms= PostFormulario(request.POST)
+        
+        if forms.is_valid():
+            info=forms.cleaned_data
+            
+            usuario=log
+            titulo_del_post=info["titulo_del_post"]
+            subtitulo=info["subtitulo"]
+            posteo=info["posteo"]
+            fecha=info["fecha"]
+            imagen=info["imagen"]
+            post1=post(usuario=usuario,titulo_del_post=titulo_del_post,subtitulo=subtitulo,posteo=posteo,fecha=fecha,imagen=imagen)
             post1.save()
-            return render(request,"concesionario/template1.html",{"mensaje":"Buen posteo"})
+            return render(request,"concesionario/template1.html",{"mensaje":"Tu posteo se publico correctamente"})
         else:
-            return render(request,"concesionario/template1.html",{"mensaje":"Ese posteo no se generó"})
+            return render(request,"concesionario/template1.html",{"forms":forms,"mensaje":"Ese posteo no se generó"})
     else:
-        miFormulariop=PostFormulario()
-        return render(request,"concesionario/postFormulario.html",{"formulario":miFormulariop})
+        forms=PostFormulario()
+        return render(request,"concesionario/postFormulario.html",{"forms":forms})
 
 @login_required
 def buscar_post(request):
@@ -85,27 +48,6 @@ def buscar_post(request):
     else:
         return render (request, "concesionario/busquedaPost.html",{"mensaje": "No ingresaste ningun dato"})
 
-def buscar_cliente(request):
-    if request.GET["dni"]:
-        denei=request.GET["dni"]
-        clientes=cliente.objects.filter(dni=denei)
-        if len(clientes)!=0:
-            return render (request, "concesionario/resultadosBusquedaCliente.html",{"clientes":clientes})
-        else:
-            return render (request, "concesionario/resultadosBusquedaCliente.html",{"mensaje": "no hay un cliente con ese DNI"})
-    else:
-        return render (request, "concesionario/busquedaCliente.html",{"mensaje": "No ingresaste ningun dato"})
-
-def buscar_auto(request):
-    if request.GET["patente"]:
-        paten=request.GET["patente"]
-        autos=auto.objects.filter(patente=paten)
-        if len(autos)!=0:
-            return render (request, "concesionario/resultadosBusquedaAuto.html",{"autos":autos})
-        else:
-            return render (request, "concesionario/resultadosBusquedaAuto.html",{"mensaje": "no hay un auto en con esa patente"})
-    else:
-        return render (request, "concesionario/busquedaAuto.html",{"mensaje": "No ingresaste ningun dato"}) 
 
 def busquedaPost(request):
     return render(request,"concesionario/busquedaPost.html")
@@ -116,29 +58,11 @@ def busquedaCliente(request):
 def busquedaAuto(request):
     return render(request,"concesionario/busquedaAuto.html")
 
-def leerAutos(request):
-    autos=auto.objects.all()
-    return render(request, "concesionario/leerAutos.html", {"autos":autos})
 
-def leerClientes(request):
-    clientes=cliente.objects.all()
-    return render(request, "concesionario/leerClientes.html", {"clientes":clientes})
 
 def leerPosts(request):
     posts=post.objects.all()
     return render(request, "concesionario/leerPosts.html", {"posts":posts})
-
-def eliminarAuto(request,id):
-    autos=auto.objects.get(id=id)
-    autos.delete()
-    totalautos=auto.objects.all()
-    return render(request, "concesionario/leerAutos.html", {"autos":totalautos})
-
-def eliminarCliente(request,id):
-    clientes=cliente.objects.get(id=id)
-    clientes.delete()
-    totalclientes=auto.objects.all()
-    return render(request, "concesionario/leerClientes.html", {"clientes":totalclientes})
 
 def eliminarPost(request,id):
     posts=post.objects.get(id=id)

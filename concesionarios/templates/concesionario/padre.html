@@ -20,15 +20,17 @@
                 <br class="collapse navbar-collapse" id="navbarResponsive">
                     <br class="navbar-nav ms-auto">
                         
-                        <li class="nav-item"><a class="nav-link" href="{% url 'busquedaAuto' %}">Busqueda Auto</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'busquedaCliente' %}">Busqueda Cliente</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'busquedaPost' %}">Busqueda Post</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'autoFormulario' %}">Formulario Auto</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'clienteFormulario' %}">Formulario Cliente</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'postFormulario' %}">Nuevo Posteo</a></li>
+                        
+                        {% if not request.user.is_authenticated %}
                         <br><li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Iniciar Sesion</a></li></br>
                         <br><li class="nav-item"><a class="nav-link" href="{% url 'register' %}">REGISTRATE!</a></li></br>
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'postFormulario' %}">Nuevo Posteo</a></li>
+                        <br><li class="nav-item"><a class="nav-link" href="{% url 'mensajeFormulario' %}">Enviar mensaje</a></li></br>
+                        <br><li class="nav-item"><a class="nav-link" href="{% url 'leerMensaje' %}">Ver mis mensajes</a></li></br>
                         <br><li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Cerrar Sesion</a></li></br>
+                        {% endif %}
                         
                         
                     </ul>
@@ -42,16 +44,6 @@
                 {% block titulo_de_pagina %}
                 
                 {% endblock %}
-                <br><button>
-                    <a href="{% url 'leerAutos' %}">Todos los Autos</a>
-                </button>
-                <button>
-                    <a href="{% url 'leerClientes' %}">Todos los Clientes</a>
-                </button>
-                <button>
-                    <a href="{% url 'leerPosts' %}">Todas los Posts</a>
-                 </button>
-            </h1> </br>
                 
             </div>
         </header>
