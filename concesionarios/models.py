@@ -1,8 +1,8 @@
-from importlib.abc import PathEntryFinder
-from django.db import models
-from ckeditor.fields import RichTextField,RichTextFormField
 
-# Create your models here.
+from django.db import models
+from ckeditor.fields import RichTextField
+from django.contrib.auth.models import User
+from datetime import datetime
 
 class auto(models.Model):
     marca=models.CharField(max_length=50)
@@ -14,12 +14,13 @@ class auto(models.Model):
         return self.patente
 
 class post(models.Model):
-    posteo=RichTextField(blank=True,null=True)
-    usuario=models.CharField(max_length=50)
+    
+    usuario=models.ForeignKey(User,related_name="usuario",on_delete=models.CASCADE)
     titulo_del_post=models.CharField(max_length=100)
-    auto=models.CharField(max_length=50)
-
-#    imagen=models.ImageField()
+    subtitulo=models.CharField(max_length=50)
+    posteo=RichTextField(blank=True,null=True)
+    fecha=models.DateTimeField(default=datetime.now)
+    imagen=models.ImageField(upload_to="posteos",blank=True,null=True)
 
     def __str__(self):
         return self.titulo_del_post

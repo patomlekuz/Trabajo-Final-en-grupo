@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "concesionarios",
     "Appmensajes",
+    "ckeditor",
 ]
 
 MIDDLEWARE = [
@@ -109,10 +110,23 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
+MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = '/media/'
+STATIC_ROOT = 'static'
 
+# CKEditor settings
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+#This ensures you have all toolbar icons
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': None, 
+        },
+    }
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_URL= "/login"
+
