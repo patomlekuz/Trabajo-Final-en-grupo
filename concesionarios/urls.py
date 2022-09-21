@@ -13,6 +13,7 @@ urlpatterns=[
     path("busquedaCliente/",busquedaCliente,name="busquedaCliente"),
     path("busquedaAuto/",busquedaAuto,name="busquedaAuto"),
     path("buscar_post/",buscar_post,name="buscar_post"),
+    path("buscar_postid/<id>",buscar_postid,name="buscar_postid"),
     path("aboutus/",aboutus,name="aboutus"),
     path("leerPosts/", leerPosts, name="leerPosts"),
     path("eliminarPost/<id>", eliminarPost, name="eliminarPost"),

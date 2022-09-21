@@ -49,9 +49,17 @@ def buscar_post(request):
     else:
         return render (request, "concesionario/busquedaPost.html",{"mensaje": "No ingresaste ningun dato"})
 
+def buscar_postid(request,id):
+    titulo=post.objects.get(id=id)
+    posts=post.objects.filter(titulo_del_post=titulo)
+#    print(posts)
+#    if len(posts)!=0:
+    return render (request, "concesionario/resultadosBusquedaPost.html",{"posts":posts})
+#    else:
+#        return render (request, "concesionario/resultadosBusquedaPost.html",{"mensaje": "no hay un post con ese título"})
 
 def busquedaPost(request):
-    return render(request,"concesionario/busquedaPost.html")
+    return render(request, "concesionario/busquedaPost.html")
 
 def busquedaCliente(request):
     return render(request,"concesionario/busquedaCliente.html")
