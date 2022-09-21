@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block titulo_de_pagina %}
-<h1>Formulario de clientes</h1>
+<h1>Enviar mensaje</h1>
 <h2>{{ mensaje }}</h2>
 <form action="{% url 'mensajeFormulario' %}" method="POST"> {% csrf_token %}
 
