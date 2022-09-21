@@ -1,0 +1,32 @@
+{% extends "concesionario/padre.html" %}
+
+{% load static %}
+
+{% block titulo_de_pagina %}
+
+<div class="profile">
+    <img src="../../static/batman.jpg">
+    <h2>@batman</h2>
+    <button><a class="follow-button" href="#">Follow</a></button>
+</div>
+
+<h1>El Perfil de {{ user.username }}</h1>
+
+<div class="follow">
+    <div>
+        <h5>Post</h5>
+        <p>{{ user.post.count }}</p>
+    </div>
+    <div>
+        <h5>Followers</h5>
+        <p>0</p>
+    </div>
+    <div>
+        <h5>Following</h5>
+        <p>0</p>
+    </div>
+
+
+</div>
+
+{% endblock %}

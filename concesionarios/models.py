@@ -3,6 +3,7 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from datetime import datetime
+from django.db.models.signals import post_save 
 
 class auto(models.Model):
     marca=models.CharField(max_length=50)
@@ -33,3 +34,16 @@ class cliente(models.Model):
     
     def __str__(self):
         return self.dni
+
+class Profile(models.Model):
+    user= models.OneToOneField(User, on_delete=models.CASCADE)
+    image= models.ImageField(default='batman.jpg')
+
+    def __str__(self):
+        return f'Perfil de {self.user.username}'
+
+def create_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+post_save.connect(create_profile, sender=User)        

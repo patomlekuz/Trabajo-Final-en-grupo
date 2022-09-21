@@ -20,4 +20,6 @@ urlpatterns=[
     path("register/",register,name="register"),
     path("logout/",LogoutView.as_view(template_name="concesionario/logout.html"),name="logout"),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path("profile/", profile, name='profile'),
+    path("profile/<str:username>/", profile, name='profile'),
 ]

@@ -6,6 +6,7 @@ from concesionarios.forms import *
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User 
 
 def concesionario(request):
     #Esto viene a ser la landing
@@ -99,3 +100,13 @@ def register(request):
     else:
         form=UserRegisterForm()
     return render(request,"concesionario/register.html",{"form":form})
+
+def profile(request, username=None):
+    current_user= request.user 
+    if username and username != current_user.username:
+        user= User.objects.get(username=username)
+        posts= user.post.all() 
+    else:
+        posts= user.post.all()
+        user= current_user     
+    return render(request, 'concesionario/profile.html', {'user':user, 'posts':post})
