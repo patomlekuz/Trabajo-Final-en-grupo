@@ -21,17 +21,17 @@ def postFormulario(request):
         
         if forms.is_valid():
             info=forms.cleaned_data
-            
             usuario=log
             titulo_del_post=info["titulo_del_post"]
             subtitulo=info["subtitulo"]
             posteo=info["posteo"]
             fecha=info["fecha"]
             imagen=info["imagen"]
-            post1=post(usuario=usuario,titulo_del_post=titulo_del_post,subtitulo=subtitulo,posteo=posteo,fecha=fecha,imagen=imagen)
+            post1=post(usuario=usuario,titulo_del_post=titulo_del_post,subtitulo=subtitulo,posteo=posteo,imagen=imagen,fecha=fecha)
             post1.save()
             return render(request,"concesionario/template1.html",{"mensaje":"Tu posteo se publico correctamente"})
         else:
+            print(forms)
             return render(request,"concesionario/template1.html",{"forms":forms,"mensaje":"Ese posteo no se generó"})
     else:
         forms=PostFormulario()
