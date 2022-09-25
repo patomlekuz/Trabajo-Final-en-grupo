@@ -35,15 +35,6 @@ class cliente(models.Model):
     def __str__(self):
         return self.dni
 
-class Profile(models.Model):
-    user= models.OneToOneField(User, on_delete=models.CASCADE)
-    image= models.ImageField(default='batman.jpg')
-
-    def __str__(self):
-        return f'Perfil de {self.user.username}'
-
-def create_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-
-post_save.connect(create_profile, sender=User)        
+class Avatar(models.Model):
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
+    imagen= models.ImageField(upload_to='avatares', null=True, blank=True)

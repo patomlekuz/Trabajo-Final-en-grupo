@@ -109,12 +109,3 @@ def register(request):
         form=UserRegisterForm()
     return render(request,"concesionario/register.html",{"form":form})
 
-def profile(request, username=None):
-    current_user= request.user 
-    if username and username != current_user.username:
-        user= User.objects.get(username=username)
-        posts= user.post.all() 
-    else:
-        posts= user.post.all()
-        user= current_user     
-    return render(request, 'concesionario/profile.html', {'user':user, 'posts':post})

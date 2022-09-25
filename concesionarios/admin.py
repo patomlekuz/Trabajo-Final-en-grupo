@@ -8,5 +8,5 @@ admin.site.register(post)
 
 admin.site.register(cliente)
 
-admin.site.register(Profile)
+admin.site.register(Avatar)
 # Register your models here.
