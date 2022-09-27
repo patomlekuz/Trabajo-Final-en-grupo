@@ -50,6 +50,7 @@ def buscar_post(request):
     else:
         return render (request, "concesionario/busquedaPost.html",{"mensaje": "No ingresaste ningun dato"})
 
+@login_required
 def buscar_postid(request,id):
     titulo=post.objects.get(id=id)
     posts=post.objects.filter(titulo_del_post=titulo)
@@ -85,10 +86,11 @@ def leerPosts(request):
     return render(request, "concesionario/leerPosts.html", {"posts":posts})
 
 def eliminarPost(request,id):
-    posts=post.objects.get(id=id)
-    posts.delete()
-    totalposts=post.objects.all()
-    return render(request, "concesionario/leerPosts.html", {"posts":totalposts})
+    posts = post.objects.get(id=id)
+    if request.user == posts.usuario:
+        posts.delete()
+        totalposts=post.objects.all()
+        return render(request, "concesionario/leerPosts.html", {"posts":totalposts})
         
 def login_request(request):
     if request.method=="POST":
