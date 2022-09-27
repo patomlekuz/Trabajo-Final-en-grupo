@@ -57,6 +57,15 @@ def buscar_postid(request,id):
     return render (request, "concesionario/resultadosBusquedaPost.html",{"posts":posts})
 #    else:
 #        return render (request, "concesionario/resultadosBusquedaPost.html",{"mensaje": "no hay un post con ese título"})
+def profile(request):
+    username=request.user
+    lista2=User.objects.get(username=username)
+    lista=Avatar.objects.filter(user=request.user)
+    if len(lista)!=0:
+        imagen=lista[0].imagen.url
+    else:
+        imagen=None
+    return render(request, "concesionario/profile.html",{"usuario":lista2,"imagen":imagen})
 
 def busquedaPost(request):
     return render(request, "concesionario/busquedaPost.html")

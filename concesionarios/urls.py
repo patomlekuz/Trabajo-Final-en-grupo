@@ -23,4 +23,5 @@ urlpatterns=[
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('editarPerfil/', editarPerfil,name="editarPerfil"),
     path('agregarAvatar/', agregarAvatar, name="agregarAvatar"),
+    path('profile/', profile, name="profile"),
 ]
