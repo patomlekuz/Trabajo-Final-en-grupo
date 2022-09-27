@@ -1,12 +1,14 @@
 {% extends "concesionario/padre.html" %}
 
 {% load static %}
-
-{% block contenido %}
+{% block titulo_de_pagina %}
 <h1>Bienvenido a tu Perfil  </h1>
+{% endblock %}
+{% block contenido %}
+
 <img src="{{ imagen }}" alt="">
-<br>usuario: {{ usuario.username }}
-<br>email: {{ usuario.email }}
+<br>Usuario: {{ usuario.username }}
+<br>Email: {{ usuario.email }}
 <br>Nombre: {{ usuario.first_name }}
 <br>Apellido: {{ usuario.last_name }}
 

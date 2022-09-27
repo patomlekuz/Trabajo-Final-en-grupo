@@ -7,8 +7,23 @@
 <h2> {{ mensaje }}</h2>
 <img height="40px" src="{{url}}">
 <p>Hola! {{ user.username }}</p>
+{% endblock %}
+{% block contenido %}
+{% for post in posts %}
 
+<br>
+<h3>Titulo del post: {{ post.titulo_del_post }}</h3>
+<h3>Usuario del post: {{ post.usuario }}</h3>
+<h3>Contenido: {{ post.posteo }}</h3>
 
+</br>
+<button>
+    <a href="{% url 'buscar_postid' post.id %}">Ver</a>
+    </button>
+
+    <br>    
+    
+{% endfor %}
 
 
 {% endblock %}
