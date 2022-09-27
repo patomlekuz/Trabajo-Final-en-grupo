@@ -21,7 +21,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include('concesionarios.urls')),
     path("", include('Appmensajes.urls')),
-    
 ]
 
 urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
