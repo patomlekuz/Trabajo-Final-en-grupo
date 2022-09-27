@@ -35,7 +35,7 @@ def mensajeFormulario(request):
     else:
         forms=ContenidoMensaje()
         return render(request, "concesionario/mensajeFormulario.html",{"forms":forms, "mensaje":"Complete el formulario"})
-
+@login_required
 def leerMensaje(request):
     receptor=request.user
     print(receptor)
@@ -46,13 +46,13 @@ def leerMensaje(request):
         return render(request,"concesionario/leerMensaje.html",{"mensajes":mensajes,"cantmensajes":cantmensajes})
     else:
         return render(request,"concesionario/leerMensaje.html",{"mensaje":"no tenes mensajes para leer"})
-
+@login_required
 def eliminarMensajes(request,id):
     mensajes=Mensaje.objects.get(id=id)
     mensajes.delete()
     totalmensajes=Mensaje.objects.all()
     return render(request, "concesionario/leerMensaje.html",{"mensaje":"mensaje Eliminado","mensajes":totalmensajes})
-
+@login_required
 def misMensajes(request,id):
     mensajes=Mensaje.objects.get(id=id)
     return render(request,"concesionario/misMensajes.html",{"mensajes":mensajes,"mensaje":"Mensaje Eliminado"})

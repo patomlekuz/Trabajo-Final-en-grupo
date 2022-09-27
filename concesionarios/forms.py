@@ -40,15 +40,15 @@ class UserRegisterForm(UserCreationForm):
         help_texts= {k:"" for k in fields}
 
 class UserEditForm(UserCreationForm):
-    email= forms.EmailField()
+    email= forms.EmailField(label="modificar e-mail")
     password1= forms.CharField(label="Nueva Contraseña", widget=forms.PasswordInput)
     password2= forms.CharField(label="Confirmar Nueva contraseña", widget=forms.PasswordInput)
-    first_name=forms.CharField(label="Modificar Nombre")
-    last_name=forms.CharField(label="Modificar Apellido")
+    first_name= forms.CharField(label="Modificar Nombre")
+    last_name= forms.CharField(label="Modificar Apellido")
     
     class Meta:
         model= User
-        fields= ["email","password1","password2"]
+        fields= ["email","password1","password2","first_name","last_name"]
         help_texts= {k:"" for k in fields}        
 
 class AvatarForm(forms.Form):

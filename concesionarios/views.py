@@ -1,10 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import auto,post,cliente
+from .models import auto,post,Avatar
 from django.template import Context,Template,loader
 from concesionarios.forms import *
 from django.contrib.auth import login,logout,authenticate
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User 
 
@@ -113,18 +113,21 @@ def register(request):
 def editarPerfil(request):
     usuario=request.user
     if request.method=="POST":
-        forms= UserEditForm(request.POST)
-        if forms.is_valid():
-            usuario.first_name=forms.cleaned_data["first_name"]
-            usuario.last_name=forms.cleaned_data["last_name"]
-            usuario.email=forms.cleaned_data["email"]
-            usuario.password1=forms.cleaned_data["password1"]
-            usuario.password2=forms.cleaned_data["password2"]
+        form=UserEditForm(request.POST)
+        if form.is_valid():
+            info=form.cleaned_data
+            print(info)
+            usuario.first_name=info["first_name"]
+            usuario.last_name=info["last_name"]
+            usuario.email=info["email"]
+            usuario.password1=info["password1"]
+            usuario.password2=info["password2"]
             usuario.save()
-            return render(request, 'concesionario/inicio.html', {'mensaje':f"Perfil de {usuario} editado"})
+            return render(request, 'concesionario/template1.html', {'mensaje':f"Perfil de {usuario} editado"})
+    
     else:
-        forms= UserEditForm(instance=usuario)
-    return render(request, 'concesionario/editarPerfil.html', {'form':forms, 'usuario':usuario})
+        form= UserEditForm(instance=usuario)
+    return render(request, 'concesionario/editarPerfil.html', {'form':form, 'usuario':usuario})
 
 
 
