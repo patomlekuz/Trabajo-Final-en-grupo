@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import auto,post,cliente
+from .models import auto,post,cliente, Avatar
 from django.template import Context,Template,loader
 from concesionarios.forms import *
 from django.contrib.auth import login,logout,authenticate
@@ -126,8 +126,6 @@ def editarPerfil(request):
         forms= UserEditForm(instance=usuario)
     return render(request, 'concesionario/editarPerfil.html', {'form':forms, 'usuario':usuario})
 
-
-
 def agregarAvatar(request):
     if request.method == 'POST':
         formulario=AvatarForm(request.POST, request.FILES)
@@ -137,10 +135,10 @@ def agregarAvatar(request):
                 avatarViejo.delete()
             avatar=Avatar(user=request.user, imagen=formulario.cleaned_data['imagen'])
             avatar.save()
-            return render(request, 'AppCoder/inicio.html', {'usuario':request.user, 'mensaje':'AVATAR AGREGADO EXITOSAMENTE', "imagen":obtenerAvatar(request)})
+            return render(request, 'concesionario/template1.html', {'usuario':request.user, 'mensaje':'AVATAR AGREGADO EXITOSAMENTE', "imagen":obtenerAvatar(request)})
     else:
         formulario=AvatarForm()
-    return render(request, 'AppCoder/agregarAvatar.html', {'form':formulario, 'usuario':request.user, "imagen":obtenerAvatar(request)})
+    return render(request, 'concesionario/agregarAvatar.html', {'form':formulario, 'usuario':request.user, "imagen":obtenerAvatar(request)})
 
 #####funcion que trae la url del avatar###
 def obtenerAvatar(request):
@@ -148,5 +146,5 @@ def obtenerAvatar(request):
     if len(lista)!=0:
         imagen=lista[0].imagen.url
     else:
-        imagen=""
+        imagen="no avatar"
     return imagen
