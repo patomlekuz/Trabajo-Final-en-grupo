@@ -32,7 +32,7 @@
                         <br><li class="nav-item"><a class="nav-link" href="{% url 'leerPosts' %}">Todos los posts</a></li></br>
                         <br><li class="nav-item"><a class="nav-link" href="{% url 'leerMensaje' %}">Ver mis mensajes</a></li></br>
                         <br><li class="nav-item"><a class="nav-link" href="{% url 'editarPerfil' %}">Editar Perfil</a></li></br>
-                        <img src="{{ imagen }}" alt="">
+                        <br><li class="nav-item"><a class="nav-link" href="{% url 'agregarAvatar' %}">Agregar avatar</a></li></br>
                         <br><li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Cerrar Sesion</a></li></br>
                         {% endif %}
                         
@@ -68,7 +68,9 @@
             <div class="container px-4">
                 <div class="row gx-4 justify-content-center">
                     <div class="col-lg-8">
-                        <h2>Dale coder daleeee</h2>
+                        <img height="40px" src="{{url}}">
+                        <p>Hola! {{ user.username }}</p>
+                        <img src="{{ imagen }}" alt="">
                     </div>
                 </div>
             </div>
