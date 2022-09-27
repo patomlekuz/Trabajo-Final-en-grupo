@@ -33,6 +33,7 @@
                         <br><li class="nav-item"><a class="nav-link" href="{% url 'leerMensaje' %}">Ver mis mensajes</a></li></br>
                         <br><li class="nav-item"><a class="nav-link" href="{% url 'editarPerfil' %}">Editar Perfil</a></li></br>
                         <br><li class="nav-item"><a class="nav-link" href="{% url 'agregarAvatar' %}">Agregar avatar</a></li></br>
+                        <br><li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Ver perfil de {{ user.username }}</a></li></br>
                         <br><li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Cerrar Sesion</a></li></br>
                         {% endif %}
                         
