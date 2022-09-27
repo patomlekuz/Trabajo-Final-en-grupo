@@ -26,7 +26,7 @@ def mensajeFormulario(request):
                 contenido=Mensaje(autor=autor,receptor=receptor,titulo=titulo,mensaje=mensaje)
                 print(contenido)
                 contenido.save()
-                return render(request, "concesionario/mensajeFormulario.html",{"mensaje":"Mensaje Enviado"})
+                return render(request, "concesionario/template1.html",{"mensaje":"Mensaje Enviado"})
             else:
                 
                 return render(request, "concesionario/mensajeFormulario.html",{"forms":forms, "mensaje":"no existe un usuario con ese nombre"})

@@ -9,8 +9,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User 
 
 def concesionario(request):
-    #Esto viene a ser la landing
-    return render (request,"concesionario/template1.html")
+    posts=post.objects.all()
+    return render(request, "concesionario/template1.html", {"posts":posts})
 
 #view para formulario con django
 
@@ -27,6 +27,7 @@ def postFormulario(request):
             posteo=info["posteo"]
             fecha=info["fecha"]
             imagen=info["imagen"]
+
             post1=post(usuario=usuario,titulo_del_post=titulo_del_post,subtitulo=subtitulo,posteo=posteo,imagen=imagen,fecha=fecha)
             post1.save()
             return render(request,"concesionario/template1.html",{"mensaje":"Tu posteo se publico correctamente"})
