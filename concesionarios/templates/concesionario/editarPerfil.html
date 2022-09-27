@@ -1,0 +1,22 @@
+
+{% extends "concesionario/padre.html" %}
+
+{% load static %}
+
+{% block contenido %}
+<h1>Edicion de perfil</h1>
+<h2>{{ mensaje }}</h2>
+<form action="{% url 'editarPerfil' %}"  method="POST"> {% csrf_token %}
+
+
+    <table>
+        {{ form.as_table }}
+
+    </table>
+
+
+    <button class="justify-content-center" type="submit">Guardar cambios</button>
+</form>
+
+
+{% endblock %}
