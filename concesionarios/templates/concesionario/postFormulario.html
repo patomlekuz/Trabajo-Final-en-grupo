@@ -5,7 +5,7 @@
 {% block titulo_de_pagina %}
 <h1>Hace tu nuevo posteo. De qué queres hablar?</h1>
 <h2>{{ mensaje }}</h2>
-<form action="{% url 'postFormulario' %}" method="POST"> {% csrf_token %}
+<form action="{% url 'postFormulario' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
 
 <table style="margin:0 auto;">
     {{ forms.as_table }}

@@ -21,7 +21,7 @@ class post(models.Model):
     subtitulo=models.CharField(max_length=50)
     posteo=RichTextField(blank=True,null=True)
     fecha=models.DateTimeField(default=datetime.now)
-    imagen=models.ImageField(upload_to="posteos",blank=True,null=True)
+    imagen=models.ImageField(upload_to="images/")
 
     def __str__(self):
         return self.titulo_del_post
