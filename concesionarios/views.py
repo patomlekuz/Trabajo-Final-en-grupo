@@ -17,7 +17,7 @@ def concesionario(request):
 def postFormulario(request):
     log=request.user
     if request.method=="POST":
-        forms= PostFormulario(request.POST)
+        forms= PostFormulario(request.POST, request.FILES)
         
         if forms.is_valid():
             info=forms.cleaned_data

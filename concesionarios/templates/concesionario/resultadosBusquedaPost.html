@@ -11,12 +11,12 @@
 {% for post in posts %}
 
 <h3>Titulo: {{ post.titulo_del_post }}</h3>
+<h3>SubTitulo: {{ post.subtitulo }}</h3>
+<h3>Fecha: {{ post.fecha }}</h3>
 <h3>Usuario: {{ post.usuario }}</h3>
-<h3>Auto: {{ post.auto }}</h3>
 <h3>Posteo: {{ post.posteo }}</h3>
-<h3>: {{ post.imagen }}</h3>
---
-{% endfor %}
+<img src="{{post.imagen.url}}" alt="imagen_posteo" >
+--{% endfor %}
 
 <h2>{{ mensaje }}</h2>
 

@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField,RichTextFormField
+from datetime import datetime
 
 from concesionarios.models import post
 
@@ -21,6 +22,7 @@ class PostFormulario(forms.ModelForm):
     
     titulo_del_post=forms.CharField(max_length=100)
     subtitulo=forms.CharField(max_length=50)
+    fecha=forms.DateTimeField(initial=datetime.now())
     imagen=forms.ImageField()
     class Meta:
         model=post
